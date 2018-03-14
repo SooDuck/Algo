@@ -63,39 +63,21 @@ public class Main {
 
 //            System.out.println(dayCosts.toString());
                 Double minCost = Double.valueOf(100);
+                Double tempCost = Double.valueOf(0);
 
                 // 계산
+                for(int k=0; k < dayCount-teams; k++) { // 0 1 2 3
+                    tempCost = Double.valueOf(0);
+                    for(int l=k; l < dayCount; l++) { // 3 4 5 6 -> 3 4 5 -> 3 4 -> 4
+                        tempCost += dayCosts.get(l);
 
-                for(int k = teams; k < dayCosts.size()-1; k++) {
-                    Double tempCost = Double.valueOf(0);
-
-//                System.out.println("if borrow " + k + " days");
-
-                    for (int l = 0; l <= dayCount - teams; l++) {
-
-                        if(l + k > dayCount) {
-                            continue;
-                        }
-
-//                    System.out.println(" * start index at " + l);
-
-                        for(int n = 0, m = l; n < k; n++, m++) {
-
-//                        System.out.print(dayCosts.get(m) + " + ");
-                            tempCost = tempCost + dayCosts.get(m);
-
-                        }
-//                    System.out.println();
-
-                        tempCost = tempCost/Double.valueOf(k);
-
-                        if(minCost > tempCost) {
-                            minCost = tempCost;
-                        }
                     }
-
-
+                    tempCost = tempCost;
+                    if(minCost < tempCost) {
+                        minCost = Double.valueOf(tempCost);
+                    }
                 }
+
 
 //                result.add(minCost);
                 System.out.println(String.format("%.11f", minCost));;
