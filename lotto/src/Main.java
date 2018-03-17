@@ -10,27 +10,35 @@ public class Main {
 
     static List<Integer> s = new ArrayList<>();
 
-    static void pick(int k, List<Integer> index, List<Integer> result, int toPick) {
+    static void pick(int k, List<Integer> result, int toPick) {
 
         // 기저조건
         if(toPick == 0) {
-            System.out.println(
-                    result.stream().map(String::valueOf).collect(Collectors.joining(" "))
-            );
+            String resultString = "";
+
+            for(int i=0; i<6; i++) {
+                resultString += String.valueOf(s.get(result.get(i))) + " ";
+            }
+
+            System.out.println(resultString);
+
+//            System.out.println(
+//                    result.stream().map(String::valueOf).collect(Collectors.joining(" "))
+//
+//            );
+
             return;
         }
 
-        int smallest = (result.isEmpty()) ? 0 : index.get(index.size() - 1) + 1;
+        int smallest = (result.isEmpty()) ? 0 : result.get(result.size() - 1) + 1;
 
         for(int i = smallest; i < k; i++) {
             //선택
-            index.add(i);
-            result.add(s.get(i));
+            result.add(i);
             //다음회차
-            pick(k, index, result, toPick-1);
+            pick(k, result, toPick-1);
             //삭제
-            result.remove(index.size() - 1);
-            index.remove(index.size() - 1);
+            result.remove(result.size() - 1);
 
         }
     }
@@ -55,16 +63,15 @@ public class Main {
             if(k == 0) {
                 break;
             }
-            if(k >= 6 || k <= 13) {
-                break;
-            }
+//            if(k >= 6 || k <= 13) {
+//                break;
+//            }
 
             for(int i=0; i<k; i++) {
                 s.add(Integer.valueOf(stringTokenizer.nextToken()));
             }
 
-            pick(k, index, result, 6);
-
+            pick(k, result, 6);
 
             s.clear();
             result.clear();
