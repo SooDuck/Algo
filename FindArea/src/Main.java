@@ -2,51 +2,45 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.*;
-import java.util.stream.Collectors;
 
 public class Main {
 
     static int m;
     static int n;
-    static int count = 1;
-    static List<Integer> sizeList = new ArrayList<>();
-    static List<List<Boolean>> colored = new ArrayList<List<Boolean>>();
-    static List<Boolean> coloredChild = new ArrayList<>();
+    static int count = 0;
+//    static List<List<Boolean>> colored = new ArrayList<List<Boolean>>();
+//    static List<Boolean> coloredChild = new ArrayList<>();
+
+    static boolean[][] colored;
+
     static int size = 0;
 
     //직사각형의 왼쪽 아래 꼭짓점의 x, y좌표값과 오른쪽 위 꼭짓점의 x, y좌표값
     static void coloring(int lx, int ly, int rx, int ry) {
 
-        for (int i = ly; i < ry; i++) {
-
-            coloredChild = colored.get(i);
-
-            for(int j = lx; j < rx; j++) {
-                coloredChild.set(j, true);
+        for (int y = ly; y < ry; y++) {
+//            coloredChild = colored.get(y);
+            for(int x = lx; x < rx; x++) {
+//                coloredChild.set(x, true);
+                colored[y][x] = true;
             }
-            colored.set(i, coloredChild);
         }
+//        coloredChild = null;
     }
 
     static void findArea(int x, int y) {
 
-        if(colored.get(y).get(x)) {
-//            if(x == (n-1) && y == (m-1)) {
-//                n = n-1;
-//            }
-            return;
-        }
+        if(colored[y][x]) return;
         // 18.03.15 자기 컬러 체크
         //          지가 컬러 true 일떄 -> 끝내고 다음, 다음은 어떻게??? -> 어짜피 컬러링 되니까 전수조사
 
-        System.out.println(" (" + x + ", " + y + ") was search");
-        colored.get(y).set(x, true);
+        colored[y][x] = true;
         size = size + 1;
 
         if(x < (n-1)) findArea(x+1, y);
         if(y < (m-1)) findArea(x, y+1);
-        if(y == (m-1) || y > 0) findArea(x, y-1);
-        if(x == (n-1) || x > 0) findArea(x-1, y);
+        if(y > 0) findArea(x, y-1);
+        if(x > 0) findArea(x-1, y);
 
 
         // 18.03.15 0, 0에서부터 전수조사하니까 위 우 만 조사하면됨
@@ -73,17 +67,28 @@ public class Main {
         m = Integer.valueOf(stringTokenizer.nextToken());
         n = Integer.valueOf(stringTokenizer.nextToken());
 
-        for (int i = 0; i < m; i++) {
+        if(m > 100 || n > 100) return;
 
-            coloredChild = new ArrayList<>();
+        colored = new boolean[m][n];
 
-            for(int j = 0; j < 7; j++) {
-                coloredChild.add(false);
-            }
-            colored.add(coloredChild);
+        for(int y = 0; y < m; y++) {
+            Arrays.fill(colored[y], false);
         }
 
+//        for (int y = 0; y < m; y++) {
+//            coloredChild = new ArrayList<>();
+//            for(int x = 0; x < n; x++) {
+//                coloredChild.add(false);
+//            }
+//            colored.add(coloredChild);
+//        }
+//        coloredChild = null;
+
         int k = Integer.valueOf(stringTokenizer.nextToken());
+
+        if(k > 100) return;
+
+        List<Integer> sizeList = new ArrayList<>();
 
         for(int i=0; i<k; i++) {
             int[] crd = Arrays.stream(br.readLine().split(" ")).mapToInt(Integer::parseInt).toArray();
@@ -92,22 +97,34 @@ public class Main {
 
         for(int y=0; y<m; y++) {
             for(int x=0; x<n; x++) {
-                if(!colored.get(y).get(x)) {
+                if(!colored[y][x]) {
                     count++;
-                    System.out.println("----- At (" + x + ", " + y + ") search start-----");
                     findArea(x, y);
                     sizeList.add(size);
-                    System.out.println("----Deep " + size + " search finish-----");
                     size = 0;
                 }
             }
         }
 
+//        for(int y=0; y<m; y++) {
+//            for(int x=0; x<n; x++) {
+//                if(!colored.get(y).get(x)) {
+//                    count++;
+//                    findArea(x, y);
+//                    sizeList.add(size);
+//                    size = 0;
+//                }
+//            }
+//        }
+
         StringBuilder sb = new StringBuilder();
         sb.append(count);
         sb.append("\n");
         Collections.sort(sizeList);
-        sb.append(sizeList.stream().map(String::valueOf).collect(Collectors.joining(" ")));
+
+        for(Integer temp : sizeList) {
+            sb.append(temp + " ");
+        }
 
         System.out.println(sb);
     }
