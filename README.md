@@ -13,3 +13,4 @@
 ### Divide And Conquer
 
 * QuadTree(backJun 1992)
+* QuadTreeReverse(algospot QUADTREE) - dealwith DFS
