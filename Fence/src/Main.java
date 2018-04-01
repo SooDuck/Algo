@@ -2,39 +2,23 @@
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class Main {
 
-    static final int HEIHSTNUM = 987654321;
-    static int[] fence(List<Integer> arr, int deep) {
+    static int fence(List<Integer> arr) {
 
         int size = arr.size();
 
-        int[] left = null;
-        int[] right = null;
-
-        int highestFence = 0;
-        int cnsctNmbr = 1;
-
-        // 작은 단위로 분해, 이분화된 문제중 답에 근접한 값 저장
-        if(size > 1) {
-            left = fence(arr.subList(0, size/2),deep+1);
-            right = fence(arr.subList(size/2, size),deep+1);
-
-            if ((left[0]*left[1]) > (right[0]*right[1])) {
-                highestFence = left[0];
-                cnsctNmbr = left[1];
-            } else if((left[0]*left[1]) < (right[0]*right[1])) {
-                highestFence = right[0];
-                cnsctNmbr = right[1];
-            }
+        if(size == 1) {
+            return arr.get(0);
         }
 
-        System.out.println("split done");
-
+        // 작은 단위로 분해, 이분화된 문제중 답에 근접한 값 저장
+        int result = Math.max(fence(arr.subList(0, size/2)), fence(arr.subList(size/2, size)));
 
         // 분해된 문제에 대한 처리
         // 기존의 가로 * 세로의 크기와
@@ -43,44 +27,28 @@ public class Main {
         // 6 2 3
         // 4 3 2
 
+        for(int low=0; low < size; low++) {
+            int value = arr.get(low);
+            boolean flag = true;
+            int cntns = 0;
+            ;
+            for(int i=0; i<size; i++) {
+                // 비교처리
+                if(value <= arr.get(i)) {
+                    flag = true;
+                    cntns = cntns + 1;
+                } else {
+                    flag = false;
+                    cntns = 0;
 
-        int fence = arr.get(0);
-        int low = 0;
-
-        int resultFence = arr.get(0);
-        int resultLow = 1;
-
-        System.out.println("in for");
-        for(int i=size; i>0; i--) {
-            // 비교처리
-
+                }
+                if(flag) {
+                    result = Math.max(result, value*cntns);
+                }
+            }
         }
-
-        // 9 >= 6 f6 l2 r12
-        // 6 >= 7
-
-        // 2 >= 3 2 1
-
-        // 2 > 3 || 2 < 6
 
         // 제일 큰걸찾고 기존에서 넘겨받은 결과와 비교
-        int[] result = new int[2];
-
-        result[0] = resultFence;
-        result[1] = resultLow;
-
-        if((highestFence * cnsctNmbr) > (resultFence * resultLow) ) {
-            result[0] = highestFence;
-            result[1] = cnsctNmbr;
-        }
-
-        for(int i=0; i < deep; i++) {
-            System.out.print("   ");
-        }
-        System.out.println(Arrays.toString(arr.toArray()) + " fence : " + result[0] + " cnsct : " + result[1] + " largest : " + (result[0] * result[1]));
-
-
-//        int result = highestFence * cnsctNmbr;
 
         return result; //most lowest num;
     }
@@ -92,13 +60,14 @@ public class Main {
 
         int n = Integer.valueOf(br.readLine());
 
-        StringBuilder sb = new StringBuilder();
+        List<Integer> output = new ArrayList<>();
 
         for(int i=0; i<n; i++) {
-            String low = br.readLine();
+            br.readLine();
             List<Integer> input = Arrays.stream(br.readLine().split(" ")).mapToInt(Integer::valueOf).boxed().collect(Collectors.toList());
-            int[] result = fence(input,0);
-            System.out.println(result[0] * result[1]);
+            output.add(fence(input));
+
         }
+        System.out.print(output.stream().map(String::valueOf).collect(Collectors.joining("\n")));
     }
 }
