@@ -13,9 +13,7 @@ public class Main {
 
         int size = arr.size();
 
-        if(size == 1) {
-            return arr.get(0);
-        }
+        if(size == 1) return arr.get(0);
 
         // 작은 단위로 분해, 이분화된 문제중 답에 근접한 값 저장
         int result = Math.max(fence(arr.subList(0, size/2)), fence(arr.subList(size/2, size)));
@@ -27,28 +25,41 @@ public class Main {
         // 6 2 3
         // 4 3 2
 
-        for(int low=0; low < size; low++) {
-            int value = arr.get(low);
-            boolean flag = true;
-            int cntns = 0;
-            ;
-            for(int i=0; i<size; i++) {
-                // 비교처리
-                if(value <= arr.get(i)) {
-                    flag = true;
-                    cntns = cntns + 1;
-                } else {
-                    flag = false;
-                    cntns = 0;
 
-                }
-                if(flag) {
-                    result = Math.max(result, value*cntns);
-                }
-            }
+        // 전수조사, 타임아웃
+//        for(int low=0; low < size; low++) {
+//            int value = arr.get(low);
+//            boolean flag = true;
+//            int cntns = 0;
+//            ;
+//            for(int i=0; i<size; i++) {
+//                // 비교처리
+//                if(value <= arr.get(i)) {
+//                    flag = true;
+//                    cntns = cntns + 1;
+//                } else {
+//                    flag = false;
+//                    cntns = 0;
+//                }
+//                if(flag) result = Math.max(result, value*cntns);
+//            }
+//        }
+
+        int start = size/2 - 1;
+        int end = size/2;
+
+        while (start > 0 && end < size-1) {
+
+            if(arr.get(start-1) >= arr.get(end+1)) --start;
+            else ++end;
+
+            int minNum = arr.get(start);
+            for (int i=start; i<=end; i++) if(minNum > arr.get(i)) minNum = arr.get(i);
+
+            int area = minNum * (end-start+1);
+            if(area > result) result = area;
+
         }
-
-        // 제일 큰걸찾고 기존에서 넘겨받은 결과와 비교
 
         return result; //most lowest num;
     }
@@ -66,8 +77,8 @@ public class Main {
             br.readLine();
             List<Integer> input = Arrays.stream(br.readLine().split(" ")).mapToInt(Integer::valueOf).boxed().collect(Collectors.toList());
             output.add(fence(input));
-
         }
+
         System.out.print(output.stream().map(String::valueOf).collect(Collectors.joining("\n")));
     }
 }
