@@ -16,56 +16,44 @@ public class Main {
 
     static boolean wildCard(List<String> r, List<String> w) {
 
-        System.out.print("r = " + Arrays.toString(r.toArray()));
-        System.out.println(" w = " + Arrays.toString(w.toArray()));
-
         boolean flag = false;
 
-        if(r.equals(w) || (r.size() == 1 && r.get(r.size()-1).equals("*")))  {
-            System.out.println("YES");
+//        System.out.println(r.toString() + " - " + w.toString());
+
+        //기저조건
+        if( (r.size() == 1 && r.get(0).equals("*")) || (r.size() <= 0 && w.size() <= 0) ) {
+            result.add(word.stream().collect(Collectors.joining("")));
+//            System.out.println("YES");
             return true;
         }
 
-        int rIndex = 0;
-        int wIndex = 0;
+        //dp
 
-//        r.get(rIndex).equals(w.get(wIndex)) || r.get(rIndex).equals("?") ||
+        //dfs
 
-//        System.out.println((r.size() > 0) + "&&" + (rIndex < r.size()) + "&&" + (w.size() > 0) + "&&" + (wIndex < w.size()) + "&&" + r.get(rIndex).equals("*"));
+        while(!flag) {
 
-//        while ((r.size() > 0 && rIndex < r.size() && w.size() > 0 && wIndex < w.size()) && r.get(rIndex).equals("*")) {
-//            if(r.get(rIndex+1).equals(w.get(++wIndex))) {
-//                ++rIndex;
-//                System.out.print("\tr = " + r.get(rIndex));
-//                System.out.println(" w = " + w.get(wIndex));
-//                break;
-//            } else {
-//                System.out.print("\tr = " + r.get(rIndex));
-//                System.out.println(" w = " + w.get(wIndex));
-//            }
-//        }
-//
-//        if((r.size() > 0 && w.size() > 0) && (r.get(rIndex).equals(w.get(wIndex)) || r.get(rIndex).equals("?")))
-//            flag = wildCard(r.subList(rIndex+1, r.size()), w.subList(wIndex+1, w.size())) || flag ? true : false;
-
-
-        System.out.println((r.size() > 0) + "&&" + (rIndex < r.size()) + "&&" + (w.size() > 0) + "&&" + (wIndex < w.size())
-                + "&& (" + r.get(rIndex).equals("*") + " || " + r.get(rIndex).equals("?") + " || " + r.get(rIndex).equals(w.get(wIndex)) + ")");
-
-        while ((r.size() > 0 && rIndex < r.size() && w.size() > 0 && wIndex < w.size())
-//                && (r.get(rIndex).equals("*") || r.get(rIndex).equals("?") || r.get(rIndex).equals(w.get(wIndex)))
-                ) {
-
-            System.out.print("\twhile = " + r.get(rIndex));
-            System.out.println(" ? " + w.get(wIndex));
-
-            if (r.get(rIndex).equals("*")) {
-                flag = wildCard(r.subList(++rIndex, r.size()), w.subList(++wIndex, w.size())) || flag;
-            } else if(!r.get(rIndex).equals("*") || r.get(rIndex).equals("?") || r.get(rIndex).equals(w.get(wIndex))) {
-                ++wIndex;
-                ++rIndex;
+            if(r.size() <= 0 || w.size() <= 0) {
+                flag = true;
+                break;
             }
 
+            if(r.get(0).equals(w.get(0)) || r.get(0).equals("?")) {
+//                r.remove(0);
+//                w.remove(0);
+                flag = wildCard(r.subList(1, r.size()), w.subList(1, w.size()));
+            } else if(r.get(0).equals("*")) {
+                if(r.size() <= 1) {
+                    flag = true;
+                    break;
+                } else {
+                    if(w.indexOf(r.get(1)) < 0) {
+                        flag = true;
+                        break;
+                    }
+                    flag = wildCard(r.subList(1, r.size()), w.subList(w.indexOf(r.get(1)), w.size()));
+                }
+            }
         }
 
         return flag;
@@ -89,8 +77,9 @@ public class Main {
                 word = Arrays.stream(br.readLine().split("")).collect(Collectors.toList());
 //                cache = new int[word.length-1];
 //                Arrays.fill(cache, -1);
-                if(wildCard(regularExpression,word)) result.add(word.stream().collect(Collectors.joining("")));
+//                if(wildCard(regularExpression, word)) result.add(word.stream().collect(Collectors.joining("")));
 
+                wildCard(regularExpression, word);
             }
 
         }
