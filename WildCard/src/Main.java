@@ -10,7 +10,7 @@ public class Main {
     static List<String> regularExpression = null;
 
     static List<String> word = null;
-//    static int[] cache = null;
+    static HashMap<String, String> cache = null;
 
     static List<String> result = new ArrayList<>();
 
@@ -18,16 +18,31 @@ public class Main {
 
         boolean flag = false;
 
-//        System.out.println(r.toString() + " - " + w.toString());
+        System.out.println(r.toString() + " - " + w.toString());
 
         //기저조건
         if( (r.size() == 1 && r.get(0).equals("*")) || (r.size() <= 0 && w.size() <= 0) ) {
             result.add(word.stream().collect(Collectors.joining("")));
+//            cache.put(word.stream().collect(Collectors.joining("")), r.stream().collect(Collectors.joining("")));
 //            System.out.println("YES");
             return true;
         }
 
         //dp
+//        if(cache.containsKey(w.stream().collect(Collectors.joining("")))) {
+//            result.add(word.stream().collect(Collectors.joining("")));
+////            System.out.println("YES");
+//            return true;
+//        }
+
+        String wStr = w.stream().collect(Collectors.joining(""));
+        String rStr = r.stream().collect(Collectors.joining(""));
+
+        if(cache.containsKey(wStr) && cache.get(wStr).equals(rStr)) {
+            result.add(word.stream().collect(Collectors.joining("")));
+//            System.out.println("YES");
+            return true;
+        }
 
         //dfs
 
@@ -56,6 +71,17 @@ public class Main {
             }
         }
 
+        if(flag) {
+            cache.put(wStr, rStr);
+        }
+
+        System.out.println("-------map------");
+        cache.forEach((k, v) -> {
+            System.out.println(k + " - " + v);
+        });
+        System.out.println("----------------");
+
+
         return flag;
     }
 
@@ -71,11 +97,11 @@ public class Main {
 
             regularExpression = Arrays.stream(br.readLine().split("")).collect(Collectors.toList());
             int n = Integer.valueOf(br.readLine());
+            cache = new HashMap<>();
 
             for (int j=0; j<n; j++) {
 
                 word = Arrays.stream(br.readLine().split("")).collect(Collectors.toList());
-//                cache = new int[word.length-1];
 //                Arrays.fill(cache, -1);
 //                if(wildCard(regularExpression, word)) result.add(word.stream().collect(Collectors.joining("")));
 
