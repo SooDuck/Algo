@@ -17,3 +17,7 @@
 * PapersNumber([backJun 1780](https://www.acmicpc.net/problem/1780))
 * XPowY([backJun 10827](https://www.acmicpc.net/problem/10827))
 * Fence([algospot FENCE](https://algospot.com/judge/problem/read/FENCE))
+
+### Dynamic Programming
+
+* TrianglePath([algospot TRIANGLEPATH](https://algospot.com/judge/problem/read/TRIANGLEPATH))
