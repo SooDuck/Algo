@@ -12,6 +12,7 @@ public class Main {
 
     static int size;
     static int[][] input;
+    static int[][] cache;
 
     static int trianglePath(int y, int x) {
 
@@ -19,10 +20,16 @@ public class Main {
             return input[y][x];
         }
 
+        if(cache[y][x] >= 0) {
+            return cache[y][x];
+        }
+
         int left = trianglePath(y+1, x);
         int right = trianglePath(y+1, x+1);
 
-        return input[y][x] + Math.max(left, right);
+        cache[y][x] = input[y][x] + Math.max(left, right);
+
+        return cache[y][x];
     }
 
     public static void main(String[] args) throws IOException {
@@ -35,10 +42,12 @@ public class Main {
         for (int i=0; i<c; i++) {
             size = Integer.valueOf(br.readLine());
             input = new int[size][size];
+            cache = new int[size][size];
 
 
             for(int k=0; k<size; k++) {
                 String[] row = br.readLine().split(" ");
+                Arrays.fill(cache[k], -1);
                 for(int l=0; l<=k; l++) {
                     input[k][l] = Integer.valueOf(row[l]);
                 }
