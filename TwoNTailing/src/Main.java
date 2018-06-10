@@ -21,7 +21,7 @@ public class Main {
         }
 
         if(cache[n] < 0) {
-            cache[n] = twoNTailing(n-1) + twoNTailing(n-2);
+            cache[n] = (twoNTailing(n-1) + twoNTailing(n-2)) % 10007;
         }
 
         return cache[n];
@@ -34,6 +34,7 @@ public class Main {
         int n = Integer.valueOf(br.readLine());
         cache = new int[n+1];
         Arrays.fill(cache, -1);
+        cache[0] = 0;
 
         System.out.println(twoNTailing(n));
 
