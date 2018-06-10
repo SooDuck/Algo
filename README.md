@@ -20,6 +20,7 @@
 
 ### Dynamic Programming
 
+* JumpGame([algospot JUMPGAME](https://algospot.com/judge/problem/read/JUMPGAME))
 * TrianglePath([algospot TRIANGLEPATH](https://algospot.com/judge/problem/read/TRIANGLEPATH))
 * SquareNumbersSum([backJun 1699](https://www.acmicpc.net/problem/1699))
 * Fibonacci([backJun 2747](https://www.acmicpc.net/problem/2747))
