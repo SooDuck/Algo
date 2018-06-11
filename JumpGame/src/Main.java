@@ -12,8 +12,6 @@ public class Main {
     static int[][] cache = null;
     static int[][] map = null;
 
-    static int way = 0;
-
     static StringBuilder sb = new StringBuilder();
 
     static boolean jumpGame(int y, int x) {
@@ -25,7 +23,6 @@ public class Main {
             Arrays.stream(cache).forEach(row -> {
                 Arrays.fill(row, 0);
             });
-            way++;
             return true;
         }
 
