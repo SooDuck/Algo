@@ -25,3 +25,4 @@
 * SquareNumbersSum([backJun 1699](https://www.acmicpc.net/problem/1699))
 * Fibonacci([backJun 2747](https://www.acmicpc.net/problem/2747))
 * 2nTailing([backJun 11726](https://www.acmicpc.net/problem/11726))
+* JumpWay([backJun 1890](https://www.acmicpc.net/problem/1890))
