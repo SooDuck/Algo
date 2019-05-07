@@ -26,3 +26,7 @@
 * Fibonacci([backJun 2747](https://www.acmicpc.net/problem/2747))
 * 2nTailing([backJun 11726](https://www.acmicpc.net/problem/11726))
 * JumpWay([backJun 1890](https://www.acmicpc.net/problem/1890))
+
+### LookingForAlgo
+
+* FlattenLand([programmers FlattenLand](https://programmers.co.kr/learn/courses/30/lessons/12984))
