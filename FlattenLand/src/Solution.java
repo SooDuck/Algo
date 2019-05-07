@@ -78,6 +78,9 @@ public class Solution {
         long left;
         long right;
 
+        long[] cache = new long[(int) max + 1];
+        Arrays.fill(cache, -1);
+
         long firstVal = Long.MAX_VALUE;
 //        long midVal = Long.MAX_VALUE;
 
@@ -100,17 +103,28 @@ public class Solution {
 //            System.out.println(first + " - " + left + " - " + right + " - " + last);
 
 //            midVal = calc(land, mid, P, Q);
-            firstVal = calc(land, first, P, Q);
-            long leftVal = calc(land, left, P, Q);
-            long rightVal = calc(land, right, P, Q);
-            long lastVal = calc(land, last, P, Q);
+//            firstVal = calc(land, first, P, Q);
+//            long leftVal = calc(land, left, P, Q);
+//            long rightVal = calc(land, right, P, Q);
+//            long lastVal = calc(land, last, P, Q);
 
-            System.out.println("------------------------");
-            System.out.println(first + " " + firstVal);
-            System.out.println(left + " " + leftVal);
-            System.out.println(right + " " + rightVal);
-            System.out.println(last + " " + lastVal);
-            System.out.println("------------------------");
+
+            firstVal = (cache[(int) first] != -1) ? cache[(int) first] : calc(land, first, P, Q);
+            long leftVal = (cache[(int) left] != -1) ? cache[(int) left] : calc(land, left, P, Q);
+            long rightVal = (cache[(int) right] != -1) ? cache[(int) right] : calc(land, right, P, Q);
+            long lastVal = (cache[(int) last] != -1) ? cache[(int) last] : calc(land, last, P, Q);
+
+            if(cache[(int) first] != -1) cache[(int) first] = firstVal;
+            if(cache[(int) left] != -1) cache[(int) left] = leftVal;
+            if(cache[(int) right] != -1) cache[(int) right] = rightVal;
+            if(cache[(int) last] != -1) cache[(int) last] = lastVal;
+
+//            System.out.println("------------------------");
+//            System.out.println(first + " " + firstVal);
+//            System.out.println(left + " " + leftVal);
+//            System.out.println(right + " " + rightVal);
+//            System.out.println(last + " " + lastVal);
+//            System.out.println("------------------------");
 
             Map<Long, Long> lowestMap = new HashMap<>();
             lowestMap.put(first, firstVal);
@@ -123,10 +137,9 @@ public class Solution {
             first = Math.min((long) list.get(0), (long) list.get(1));
             last = Math.max((long) list.get(0), (long) list.get(1));
 
-            System.out.println(first + " - " + last);
-            System.out.println("------------------------");
+//            System.out.println(first + " - " + last);
+//            System.out.println("------------------------");
 
-            break;
         }
 
             answer = firstVal;
@@ -151,16 +164,16 @@ public class Solution {
         Collections.sort(list, (o1, o2) -> ( -1 * ((Comparable) map.get(o2)).compareTo(map.get(o1))));
 //        Collections.reverse(list);
 
-        System.out.println("*****************************************");
-        for (Object a : map.entrySet()) {
-            String[] b = String.valueOf(a).split("=");
-            System.out.println(b[0] + " - " + b[1]);
-        }
-
-        for (long a : list) {
-            System.out.println(a);
-        }
-        System.out.println("*****************************************");
+//        System.out.println("*****************************************");
+//        for (Object a : map.entrySet()) {
+//            String[] b = String.valueOf(a).split("=");
+//            System.out.println(b[0] + " - " + b[1]);
+//        }
+//
+//        for (long a : list) {
+//            System.out.println(a);
+//        }
+//        System.out.println("*****************************************");
 
 
         return list;
