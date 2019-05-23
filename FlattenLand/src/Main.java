@@ -1,5 +1,4 @@
 
-
 public class Main {
 
     public static void main(String[] args) {
@@ -46,29 +45,76 @@ public class Main {
 
 
 
-        result = new Solution().solution(new int[][]{{0, 1, 3, 2}
-                , {2, 0, 2, 0}
-                , {9, 1, 0, 3}
-                , {7, 2, 3 ,1}}, 2, 3);
+//        result = new Solution().solution(new int[][]{{0, 1, 3, 2}
+//                , {2, 0, 2, 0}
+//                , {9, 1, 0, 3}
+//                , {7, 2, 3 ,1}}, 2, 3);
 
-        System.out.println("Solution result : " + result);
+//        result = new Solution().solution(new int[][]{{3, 3, 6, 0}
+//                , {5, 3, 5, 2}
+//                , {0, 5, 3, 5}
+//                , {5, 4, 2, 3}}, 2, 103);
+
+//        result = new Solution().solution(new int[][]{{0, 0, 0, 0}
+//                , {0, 0, 0, 0}
+//                , {0, 0, 0, 0}
+//                , {6, 0, 0, 0}}, 2, 103);
+//
+//        System.out.println("Solution result : " + result);
 
 
-//        long result = new Sol().solution(new int[][]{{4, 4, 3}
+//        long result = new Solution2().solution(new int[][]{{4, 4, 3}
 //                , {3, 2, 2}
 //                , {2, 1, 0}}, 5, 3);
 
 
         System.out.println("--------------------------------------------");
-//        result = new Sol().solution(new int[][]{{0, 0, 0, 0}
+//        result = new Solution2().solution(new int[][]{{0, 0, 0, 0}
 //                , {0, 0, 0, 0}
 //                , {0, 0, 0, 0}
 //                , {6, 0, 0, 0}}, 2, 103);
 
-        result = new Sol().solution(new int[][]{{0, 1, 3, 2}
-                                                        , {2, 0, 2, 0}
-                                                        , {9, 1, 0, 3}
-                                                        , {7, 2, 3 ,1}}, 2, 3);
-        System.out.println("Sol result : " + result);
+//        result = new Solution2().solution(new int[][]{{0, 1, 3, 2}
+//                                                        , {2, 0, 2, 0}
+//                                                        , {9, 1, 0, 3}
+//                                                        , {7, 2, 3 ,1}}, 2, 3);
+
+//        result = new Solution2().solution(new int[][]{{3, 3, 6, 0}
+//                , {5, 3, 5, 2}
+//                , {0, 5, 3, 5}
+//                , {5, 4, 2, 3}}, 2, 103);
+
+//        result = new Solution2().solution(new int[][]{{0, 0, 0, 0}
+//                , {0, 0, 0, 0}
+//                , {0, 0, 0, 0}
+//                , {6, 0, 0, 0}}, 2, 103);
+//
+//        System.out.println("Solution2 result : " + result);
+
+
+//        result = new Slope().solution(new int[][]{{0, 1, 3, 2}
+//                , {2, 0, 2, 0}
+//                , {9, 1, 0, 3}
+//                , {7, 2, 3 ,1}}, 2, 3);
+
+//        result = new Slope().solution(new int[][]{{3, 3, 6, 0}
+//                , {5, 3, 5, 2}
+//                , {0, 5, 3, 5}
+//                , {5, 4, 2, 3}}, 2, 103);
+
+//        result = new Slope().solution(new int[][]{{0, 0, 0, 0}
+//                , {0, 0, 0, 0}
+//                , {0, 0, 0, 0}
+//                , {6, 0, 0, 0}}, 2, 103);
+//
+//        System.out.println("slope result : " + result);
+//
+//
+//        result = new Solut().solution(new int[][]{{0, 0, 0, 0}
+//                , {0, 0, 0, 0}
+//                , {0, 0, 0, 0}
+//                , {6, 0, 0, 0}}, 2, 103);
+//
+//        System.out.println("Solut result : " + result);
     }
 }

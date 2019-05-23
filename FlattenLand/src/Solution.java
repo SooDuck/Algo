@@ -1,11 +1,11 @@
-import java.security.KeyStore;
 import java.util.*;
-import java.util.stream.Collectors;
 
 /**
  * @author Sooduck, Park
  * @since 2019-04-09 [2019.Apr.09]
- */
+ *
+ * 구간을 3등분 하여 중간값(연산시, 배열의 요소 각각에 대하여 연산)을 이용하여 탐색 -> 시간초과
+ * */
 
 public class Solution {
 
